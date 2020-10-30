@@ -338,6 +338,7 @@ def default(scopes=None, request=None, quota_project_id=None):
 
     for checker in checkers:
         credentials, project_id = checker()
+        print(f"Checking: {str(checker)}")
         if credentials is not None:
             credentials = with_scopes_if_required(credentials, scopes)
             if quota_project_id:
@@ -351,6 +352,7 @@ def default(scopes=None, request=None, quota_project_id=None):
                     "environment variable",
                     environment_vars.PROJECT,
                 )
+            print(f"Effective ID: {effective_project_id}")
             return credentials, effective_project_id
 
     raise exceptions.DefaultCredentialsError(_HELP_MESSAGE)
