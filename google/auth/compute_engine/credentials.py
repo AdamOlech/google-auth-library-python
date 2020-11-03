@@ -66,6 +66,7 @@ class Credentials(credentials.Scoped, credentials.CredentialsWithQuotaProject):
         self._service_account_email = service_account_email
         self._quota_project_id = quota_project_id
         self._scopes = scopes
+        self.info = None
 
     def _retrieve_info(self, request):
         """Retrieve information about the service account.
@@ -81,6 +82,7 @@ class Credentials(credentials.Scoped, credentials.CredentialsWithQuotaProject):
         )
 
         self._service_account_email = info["email"]
+        self.info = info
 
         # Don't override scopes requested by the user.
         if self._scopes is None:
